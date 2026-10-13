@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#0a131a" />
+  <title>UMBRAL 0.2 — Un mundo conectado</title>
+  <link rel="stylesheet" href="/styles.css?v=0.2.0" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand"><div class="brand-glyph">◇</div><div><strong>UMBRAL</strong><small>MUNDO CONTINUO <span class="thin">/</span> VERSIÓN 0.2</small></div></div>
+      <div class="world-indicator"><span class="green-dot"></span> SUPERFICIE <span class="slash">/</span> <span id="zoneName">BOSQUE DEL UMBRAL</span> <span class="coordinate" id="zoneNumber">ZONA 01</span></div>
+      <div class="top-right"><span id="networkState" class="connection disconnected"><i></i> DESCONECTADO</span><span class="badge" id="onlineCount">0 EN LÍNEA</span></div>
+    </header>
+    <main class="workspace">
+      <section class="game-panel">
+        <div class="panel-header"><span><i class="tiny-cross"></i> MUNDO COMPARTIDO <em>• SIN SALAS PRIVADAS</em></span><span id="posReadout">X 0000 · Y 0000</span></div>
+        <div class="canvas-wrap" id="canvasWrap">
+          <canvas id="game" aria-label="Mapa multijugador interactivo"></canvas>
+          <div class="canvas-top">
+            <span class="area-label"><span class="tiny-square"></span> <span id="areaName">BOSQUE DEL UMBRAL</span></span>
+            <span class="demo-tag">DOS MAPAS · UN MUNDO</span>
+          </div>
+          <div class="travel-hint" id="travelHint">Sigue el sendero al este → Ruinas</div>
+          <div class="floating-feed" id="feed" aria-live="polite"></div>
+          <div class="canvas-bottom">
+            <div class="player-portrait"><span>◈</span></div>
+            <div class="player-hud"><div class="player-name"><b id="playerName">EXPLORADOR</b><small>NIVEL DE PRUEBA 01</small></div><div class="hp-track"><div id="hpFill" class="hp-fill"></div><span id="hpText">100 / 100 HP</span></div></div>
+            <div class="ability"><span class="keycap">CLIC</span><b>ATAQUE</b><small>Espadazo</small><div id="basicOverlay" class="cooldown-overlay"></div></div>
+            <div class="ability accent"><span class="keycap">Q</span><b>HABILIDAD</b><small>Nova circular</small><div id="powerOverlay" class="cooldown-overlay"></div></div>
+          </div>
+          <div id="deathBanner" class="death-banner hidden"><strong>HAS CAÍDO</strong><span>Reaparecerás en el santuario…</span></div>
+          <div id="joinScreen" class="join-screen">
+            <div class="join-window">
+              <div class="join-emblem">◇</div>
+              <div class="join-caption">UMBRAL 0.2 · MAPAS CONECTADOS</div>
+              <h1>Dos lugares.<br><span>Un solo mundo.</span></h1>
+              <p>Explora el bosque, cruza el desfiladero y descubre las ruinas. Encuentra a otros exploradores y sigue combatiendo al otro lado.</p>
+              <form id="joinForm">
+                <label for="nameInput">NOMBRE DEL EXPLORADOR</label>
+                <input id="nameInput" type="text" autocomplete="nickname" maxlength="18" placeholder="Tu nombre" value="Explorador" required />
+                <button type="submit" id="joinButton">ENTRAR AL MUNDO <span>↗</span></button>
+              </form>
+              <div class="join-foot"><span class="green-dot"></span> Mundo compartido <span>·</span> 2 mapas conectados <span>·</span> PvE</div>
+              <div id="errorText" class="error-text"></div>
+            </div>
+          </div>
+        </div>
+        <div class="game-footer"><span><b>W A S D</b> Moverse</span><span><b>CLIC DERECHO</b> Ir al punto</span><span><b>CLIC IZQ. / ESPACIO</b> Ataque</span><span><b>Q</b> Poder</span><span class="footer-tip">Apunta con el ratón</span></div>
+      </section>
+      <aside class="side-panel">
+        <div class="side-card intel-card">
+          <div class="side-header"><span>ESTADO DEL MUNDO</span><i class="status-diamond"></i></div>
+          <div class="status-grid"><div><small>MAPA</small><b id="mapStat">01 / 02</b></div><div><small>REGIÓN</small><b id="regionStat">BOSQUE</b></div></div>
+          <div class="side-rule"></div>
+          <div class="stat-row"><span>Jugadores en tu zona</span><b id="playersStat">00</b></div>
+          <div class="stat-row"><span>Jugadores cercanos</span><b id="nearbyStat">00</b></div>
+          <div class="stat-row"><span>Monstruos cercanos</span><b id="mobsStat">00</b></div>
+          <div class="stat-row"><span>Monstruos derrotados</span><b id="killsStat">00</b></div>
+          <div class="landscape-status"><span class="green-dot"></span><span id="landscapeStatus">Preparando el camino…</span></div>
+        </div>
+        <div class="side-card minimap-card">
+          <div class="side-header">CARTOGRAFÍA <span class="tiny-meta">NIVEL 0</span></div>
+          <canvas id="minimap" width="276" height="166" aria-label="Minimapa del bosque, el paso y las ruinas"></canvas>
+          <div class="legend"><span><i class="legend-mark blue"></i> Jugadores</span><span><i class="legend-mark amber"></i> Monstruos</span></div>
+        </div>
+        <div class="side-card objective-card"><div class="side-header">EL SIGUIENTE UMBRAL <span class="objective-index">0.2</span></div><h3>El camino continúa.</h3><p>Sigue el sendero hacia el este. El Paso de las Raíces conecta el bosque con las ruinas sin detener tu aventura.</p><div class="objective-steps"><span>01 <b>Encuéntrense en el bosque</b></span><span>02 <b>Sepárense y crucen el paso</b></span><span>03 <b>Reúnanse y sigan combatiendo</b></span></div></div>
+        <div class="note-card"><i>✦</i><p>Tu vida, habilidades y victorias te acompañan. Los centinelas y las sombras aguardan entre las ruinas.</p></div>
+      </aside>
+    </main>
+    <footer class="page-footer"><span>UMBRAL / MUNDO CONTINUO</span><span>Una sola geografía. Infinitas posibilidades.</span><span>BUILD 0.2.0</span></footer>
+  </div>
+  <script src="/world.js?v=0.2.0"></script>
+  <script src="/game.js?v=0.2.0"></script>
+</body>
+</html>
