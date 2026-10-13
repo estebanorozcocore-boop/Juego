@@ -1,0 +1,7 @@
+{
+  "name": "UMBRAL — Mundo Continuo",
+  "description": "Juego multijugador en mundo continuo con navegación fluida entre mapas, combate en tiempo real y simulación espacial compartida.",
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
